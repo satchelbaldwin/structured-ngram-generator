@@ -79,6 +79,27 @@ past-tense verb followed a noun, the verb would need to be used with that
 noun prior in the corpus, hopefully introducing semantic accuracy to some
 degree. In this way, phrases should be more accurate and congruent, even if
 the overall sentence still has mixed ideas.
+  
+The first step is to traverse sentences from NLTK's tagged subset of the
+Penn Treebank and to scrape rules from each level of the tree of each
+sentence. For example, if a sentence has the tree `(S (NP (NN)) (VP
+(VBD)))`, rules can be made by seeing each node's direct children. For
+example, `S` can go to `NP` and `VP` directly after; hence the rule `S -> VP
+NP` being added. Similarly, `NP -> NN` and `VP -> VBD` could be added. Then,
+these would be weighted and given probabilities based on the frequencies of
+the constructs over the whole treebank.
+  
+The second step is to generate a sentence structure from tags based on the
+PCFG made earlier. Given a sentence, determine the next rule by generating a
+random number between `0 and 1.0` and deciding the rule that falls in that
+range. Randomly picking rules by the PCFG creates the list of tags used by
+the ngram generator after.
+  
+When generating wwith ngrams, the model used was 
+
+## Results and Conclusion
+
+Still a work in progress! 
 
 # Inspirations and Referenced Papers
 https://dc.uwm.edu/cgi/viewcontent.cgi?article=2063&context=etd
