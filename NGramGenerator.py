@@ -93,7 +93,6 @@ class NGramGenerator:
         self.ngram_model = build_ngram_model(corpus)
         self.unigrams = self.ngram_model[0]
         print("Tagging unigrams...")
-        print(self.unigrams.ngrams.items())
         self.unigrams.pos_tag()
         self.bigrams = self.ngram_model[1]
         print("Tagging bigrams...")

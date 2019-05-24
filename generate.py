@@ -15,7 +15,7 @@ if __name__ == "__main__":
         ng = NGramGenerator(cfile.readlines())
         cfile.close()
 
-        pickle.dump(ng, open(ofile, 'wb'))
+        pickle.dump(ng, ofile)
         ofile.close()
     if verb == "sentence":
         pickle_dump = sys.argv[2]

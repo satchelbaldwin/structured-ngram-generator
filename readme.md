@@ -21,7 +21,8 @@ where verb is:
 
 Example usage:
 
-`generate dickens_text.txt dickens_model`
+`generate dickens_text.txt dickens_model`  
+
 `generate dickens_model dickens_sentences.txt 10`
 
 ## The First Effort
@@ -132,13 +133,44 @@ probablistic method. This continues until the sentence is formed.
 
 Penn TreeBank has some crazy rules in the grammar. Unfortunately, this makes
 the supposedly syntactically correct sentences still come out sounding
-really weird and unnatural. 
+really weird and unnatural. Not only that, the NLTK part of speech tagger
+has some slight quirks that make it clash with the Penn TreeBank tags; for
+example, the NLTK tagger never tags anything as `NNPS` (plural proper noun),
+but the Penn TreeBank has some sentences that expect that tag. Also the NLTK
+part of speech tagger tags some non-word symbols oddly; for example,
+punctuation gets tagged as a noun. Stripping this could possibly be useful
+in the future. Other than that, many of the results seem in line with other
+ngram generation models.
 
 ## Results and Conclusion
 
-Still a work in progress! 
+Here is a random sample of sentences generated from Pride and Prejudice by
+Jane Austen.
+  
+`him frequently?” depended on something`  
+`satisfactions the house, whichever as myself. to see anything about.`  
+`or the _most_ amusing. had which the _most_ amusing. is remarkably fine, collins not`  
+`got three miles,`  
+`to become a value for she to hear,`  
+`be disregarded? hate me.” was truth in one or a monosyllable. do insist give pleasure most heartily to those rites`  
+`“i _do_ “i have to attack is in hopes proposed girls they thought, times she grieved “yes; and obliging. the vestibule into most delightfully`  
+`thought “i _do_`  
+`“but people takes should to explaining to yourself.`  
+`_that_ will delivered journey, into the matter--to gentlemen`  
+  
+From what I can tell, this model has significant limitations that might make
+it less suitable for text generation for most cases than simple ngram
+generation. The reason for this is that many corpuses I have tried with this
+model do not have adequate amounts of material to cover many odd cases of
+tags that occur together. For example, the Penn TreeBank sentences
+frequently have the construct of `NNP NNP NNP`. Presumably, this is first,
+middle, and last names, or something like a corporation's name, or a name
+like New York City. Most books I have tried this with struggle to fit to
+this, given how infrequently all three of a given character's names are used
+back to back. Many constructs like this hinder generation and make
+ill-fitting sections much more common than I had anticipated.  
 
 # Inspirations and Referenced Papers
-https://dc.uwm.edu/cgi/viewcontent.cgi?article=2063&context=etd
-https://www.aclweb.org/anthology/O06-1004
+https://dc.uwm.edu/cgi/viewcontent.cgi?article=2063&context=etd  
+https://www.aclweb.org/anthology/O06-1004  
 "Automatic Learning of Context-Free Grammar", by Chen, Tseng, and Chen
