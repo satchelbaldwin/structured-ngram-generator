@@ -21,9 +21,9 @@ where verb is:
 
 Example usage:
 
-`generate dickens_text.txt dickens_model`  
+`./generate.py generate dickens_text.txt dickens_model`  
 
-`generate dickens_model dickens_sentences.txt 10`
+`./generate.py sentence dickens_model dickens_sentences.txt 10`  
 
 ## The First Effort
 
@@ -147,16 +147,16 @@ ngram generation models.
 Here is a random sample of sentences generated from Pride and Prejudice by
 Jane Austen.
   
-`him frequently?” depended on something`  
-`satisfactions the house, whichever as myself. to see anything about.`  
-`or the _most_ amusing. had which the _most_ amusing. is remarkably fine, collins not`  
-`got three miles,`  
-`to become a value for she to hear,`  
-`be disregarded? hate me.” was truth in one or a monosyllable. do insist give pleasure most heartily to those rites`  
-`“i _do_ “i have to attack is in hopes proposed girls they thought, times she grieved “yes; and obliging. the vestibule into most delightfully`  
-`thought “i _do_`  
-`“but people takes should to explaining to yourself.`  
-`_that_ will delivered journey, into the matter--to gentlemen`  
++ `him frequently?” depended on something`  
++ `satisfactions the house, whichever as myself. to see anything about.`  
++ `or the _most_ amusing. had which the _most_ amusing. is remarkably fine, collins not`  
++ `got three miles,`  
++ `to become a value for she to hear,`  
++ `be disregarded? hate me.” was truth in one or a monosyllable. do insist give pleasure most heartily to those rites`  
++ `“i _do_ “i have to attack is in hopes proposed girls they thought, times she grieved “yes; and obliging. the vestibule into most delightfully`  
++ `thought “i _do_`  
++ `“but people takes should to explaining to yourself.`  
++ `_that_ will delivered journey, into the matter--to gentlemen`  
   
 From what I can tell, this model has significant limitations that might make
 it less suitable for text generation for most cases than simple ngram
