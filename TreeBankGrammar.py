@@ -1,12 +1,14 @@
+#!/usr/bin/env python3
+
 import nltk
 from nltk.corpus import treebank
 from random import random
 
 class TreeBankGrammar:
     def __init__(self):
-        self.symbols_list = []
-        self.symbols = frozenset()
         self.rules = {}
+        self.get_rules_from_treebank()
+        self.finalize_rule_probabilities()
     # add a rule if it doesn't exist
     # otherwise, if it does, count that rule
     # towards the probability total for the lhs expression.
@@ -50,8 +52,7 @@ class TreeBankGrammar:
             nodes.remove(node)
 
     def get_rules_from_treebank(self):
-        sentences = list(treebank.parsed_sents())
-        for sentence in sentences:
+        for sentence in treebank.parsed_sents():
             self.traverse_node(sentence)
 
     def is_terminal(self, tag):
@@ -92,9 +93,3 @@ class TreeBankGrammar:
                 rules_list.append(rule_string)
         return "\n".join(rules_list)
 
-def test():
-    tbg = TreeBankGrammar()
-    tbg.get_rules_from_treebank()
-    tbg.finalize_rule_probabilities()
-    print(tbg)
-    return tbg
