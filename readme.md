@@ -1,5 +1,29 @@
 # Sentence Generation with N-gram Models Combined with Pre-existing Structures
 
+## Usage
+
+```
+generate.py verb arguments...
+
+where verb is:
+
+  generate [corpus] [output]
+  ----------------------
+    corpus: input file to read from
+    output: where to save the generated model
+
+  sentence [model] [output] [number]
+  ----------------------------
+    model:  a model created by generate
+    output: where to save the generated sentences
+    number: how many sentences to generate
+```
+
+Example usage:
+
+`generate dickens_text.txt dickens_model`
+`generate dickens_model dickens_sentences.txt 10`
+
 ## The First Effort
 
 Instead of fitting a model to full sentences in the grammar, this model
@@ -36,7 +60,7 @@ abstract stand in for the exact same structures they represented. Other
 ideas involved finding similar patterns _around_ a given word; for example,
 finding sentences in the format of `[tags] CONJUNCTION [tags]` where the two
 surrounding sets of tags around the conjunctions could be considered phrases
-that could reoccur in other places. This was very innaccurate for
+that could reoccur in other places. This was very inaccurate for
 generation, as the model was much too liberal with how it defined phrases.
 Many unrelated tag clusters would be assumed to have the same role. This
 pursuit felt like a dead end with my current knowledge of the field.
@@ -95,7 +119,20 @@ random number between `0 and 1.0` and deciding the rule that falls in that
 range. Randomly picking rules by the PCFG creates the list of tags used by
 the ngram generator after.
   
-When generating wwith ngrams, the model used was 
+When generating with ngrams, the model used was bigram generation given the
+prior tag. For example, given that the precending word was "The" and the
+following word is of type "NN", the generator would pick the word by
+probablistic method from ngrams in the corpus restricting to only searching
+through words of tag "NN". If the tag generator generates word and tag pairs
+that do not exist in the corpus, the generator will prioritize preserving
+the tag sequence; it will choose a unigram that fits the tag bu the same
+probablistic method. This continues until the sentence is formed.
+
+## Discussion
+
+Penn TreeBank has some crazy rules in the grammar. Unfortunately, this makes
+the supposedly syntactically correct sentences still come out sounding
+really weird and unnatural. 
 
 ## Results and Conclusion
 
